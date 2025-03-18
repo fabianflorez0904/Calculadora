@@ -210,13 +210,19 @@ class Calculator:
 
 
 def resource_path(relative_path):
-    """Gestión de recursos para empaquetado"""
+    """ Función mejorada para recursos empaquetados """
     try:
         base_path = sys._MEIPASS
-    except Exception:
+    except AttributeError:
         base_path = os.path.abspath(".")
 
-    return os.path.join(base_path, relative_path)
+    full_path = os.path.join(base_path, relative_path)
+
+    # Verifica si el archivo realmente existe
+    if not os.path.exists(full_path):
+        raise FileNotFoundError(f"Recurso no encontrado: {full_path}")
+
+    return full_path
 
 
 if __name__ == '__main__':
