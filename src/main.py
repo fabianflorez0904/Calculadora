@@ -1,4 +1,15 @@
 import tkinter as tk
+import os
+import sys
+
+# Función para obtener la ruta correcta del archivo dentro del ejecutable
+
+
+def resource_path(relative_path):
+    """ Obtiene la ruta del archivo dentro del ejecutable """
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return relative_path
 
 
 if __name__ == "__main__":
@@ -9,7 +20,9 @@ if __name__ == "__main__":
     ventana_calculadora.configure(bg='#2c3e50')
 
     # Configuración del icono
-    ruta_icono_ventana = "assets/icons/icono_ventana_calculadora.ico"
+
+    ruta_icono_ventana = resource_path(
+        "assets/icons/icono_ventana_calculadora.ico")
     ventana_calculadora.iconbitmap(ruta_icono_ventana)
 
     # Definicion de variables
@@ -87,11 +100,11 @@ if __name__ == "__main__":
     pantalla = tk.Entry(ventana_calculadora,
                         font=("Helvetica", 24),
                         justify="right",
-                        bd=0,
+                        bd=2,
                         fg="white",
                         bg="#34495e",
                         insertbackground="white",
-                        relief="solid",
+                        relief="sunken",
                         highlightthickness=0,
                         width=16,
                         textvariable=texto_en_pantalla)
